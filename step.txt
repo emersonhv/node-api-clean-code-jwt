@@ -1,0 +1,26 @@
+-----------------Instalacion de typescript en el proyecto
+npm i -D typescript @types/node ts-node-dev rimraf
+
+-----------------Archivo de configuracion de typescript
+npx tsc --init --outDir dist/ --rootDir src
+
+-----------------Script en package.json para dev. build y start
+"dev": "tsnd --respawn --clear src.app.ts",
+"build": "rimraf ./dist && tsc",
+"start": npm run build && node dist/app.js"
+
+
+arquitectura limpia
+
+presentation
+--Lo mas de cerca a los usarios que consumen la API
+domain
+--La información y reglas que gobiernan la aplicacion
+--No debe tener dependencias externas
+++datasources
+---Las reglas de negocio donde se rigen la optencion de datos
+++repositories
+---Quienes se van a comunicar con los datasources
+infrastructure
+--Implementacions de datasource, mappers, repositorios, punto intermedio
+--entre presentation y domain
